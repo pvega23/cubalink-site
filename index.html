@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CubaLink — Internet Satelital para Cuba | Satellite Internet for Cuba</title>
+<meta name="description" content="CubaLink: Revendedor autorizado de Starlink para Cuba. Internet satelital de alta velocidad, 100-400 Mbps. Cobertura nacional.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%23000'/><path d='M10 20 Q16 8 26 12' stroke='%2300a3ff' stroke-width='2' fill='none'/><circle cx='12' cy='18' r='2' fill='%2300a3ff'/></svg>">
+<style>
+/* ===== RESET & BASE ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;color:#e0e0e0;line-height:1.6;overflow-x:hidden;background:#000}
+img,svg{display:block;max-width:100%}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+
+/* ===== TYPOGRAPHY ===== */
+h1{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:800;line-height:1.1;letter-spacing:-0.02em}
+h2{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;line-height:1.2;letter-spacing:-0.01em}
+h3{font-size:clamp(1.1rem,2vw,1.4rem);font-weight:600;line-height:1.3}
+p{font-size:clamp(0.95rem,1.5vw,1.1rem)}
+
+/* ===== UTILITY ===== */
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.section-pad{padding:120px 0}
+.section-label{font-size:0.85rem;font-weight:700;text-transform:uppercase;letter-spacing:0.15em;color:#00a3ff;margin-bottom:12px}
+.section-title{margin-bottom:20px;color:#fff}
+.section-subtitle{color:rgba(255,255,255,0.5);max-width:640px;margin:0 auto 48px}
+.text-center{text-align:center}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:6px;font-weight:600;font-size:1rem;transition:all 0.3s ease}
+.btn-primary{background:#ff6b35;color:#fff}
+.btn-primary:hover{background:#e5552a;transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,107,53,0.4)}
+.btn-secondary{background:transparent;color:#fff;border:2px solid rgba(255,255,255,0.3)}
+.btn-secondary:hover{border-color:#00a3ff;background:rgba(0,163,255,0.08);box-shadow:0 0 20px rgba(0,163,255,0.15)}
+.btn-outline{background:transparent;color:#fff;border:2px solid rgba(255,255,255,0.3)}
+.btn-outline:hover{background:rgba(0,163,255,0.1);border-color:#00a3ff;box-shadow:0 0 20px rgba(0,163,255,0.2)}
+
+/* ===== SCROLL ANIMATIONS ===== */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-40px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(40px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+
+/* ===== ANIMATED STAR FIELD ===== */
+.starfield{position:absolute;top:0;left:0;right:0;bottom:0;overflow:hidden;pointer-events:none}
+.star{position:absolute;background:#fff;border-radius:50%;animation:twinkle var(--dur) ease-in-out infinite var(--delay)}
+@keyframes twinkle{0%,100%{opacity:0.15}50%{opacity:1}}
+
+/* ===== SATELLITE TRAILS ===== */
+.satellite-trail{position:absolute;top:0;left:0;right:0;bottom:0;overflow:hidden;pointer-events:none}
+.satellite-trail::before,.satellite-trail::after{content:'';position:absolute;width:200px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.6),transparent);transform:rotate(-25deg);animation:sat-move1 8s linear infinite}
+.satellite-trail::after{width:150px;background:linear-gradient(90deg,transparent,rgba(0,163,255,0.5),transparent);transform:rotate(-35deg);animation:sat-move2 12s linear infinite 3s}
+.satellite-trail-3{position:absolute;top:0;left:0;right:0;bottom:0;overflow:hidden;pointer-events:none}
+.satellite-trail-3::before{content:'';position:absolute;width:180px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);transform:rotate(-20deg);animation:sat-move3 15s linear infinite 6s}
+@keyframes sat-move1{0%{top:-10%;left:-20%}100%{top:110%;left:120%}}
+@keyframes sat-move2{0%{top:-5%;right:-20%;left:auto}100%{top:105%;right:120%}}
+@keyframes sat-move3{0%{top:-15%;left:30%}100%{top:115%;left:80%}}
+
+/* ===== EARTH ATMOSPHERE LINE ===== */
+.earth-glow{position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent 5%,#00a3ff 30%,#00d4ff 50%,#00a3ff 70%,transparent 95%);z-index:3;box-shadow:0 0 20px rgba(0,163,255,0.5),0 0 60px rgba(0,163,255,0.2),0 -5px 30px rgba(0,212,255,0.15)}
+.earth-glow::before{content:'';position:absolute;bottom:0;left:0;right:0;height:40px;background:linear-gradient(to top,rgba(0,163,255,0.06),transparent);pointer-events:none}
+
+/* ===== NAV ===== */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:16px 0;transition:all 0.3s ease}
+.nav.scrolled{background:rgba(0,0,0,0.92);backdrop-filter:blur(16px);padding:10px 0;box-shadow:0 1px 0 rgba(0,163,255,0.1)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px;color:#fff;font-size:1.5rem;font-weight:800;letter-spacing:-0.02em}
+.nav-logo svg.emblem{width:40px;height:40px}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{color:rgba(255,255,255,0.65);font-size:0.9rem;font-weight:500;transition:color 0.2s}
+.nav-links a:hover{color:#fff}
+.lang-toggle{display:flex;align-items:center;background:rgba(255,255,255,0.08);border-radius:6px;overflow:hidden;margin-left:16px}
+.lang-btn{padding:6px 14px;font-size:0.85rem;font-weight:600;color:rgba(255,255,255,0.4);transition:all 0.2s}
+.lang-btn.active{background:#00a3ff;color:#fff}
+.lang-divider{color:rgba(255,255,255,0.2);font-size:0.8rem}
+.nav-menu-btn{display:none;flex-direction:column;gap:5px;padding:8px}
+.nav-menu-btn span{width:24px;height:2px;background:#fff;border-radius:2px;transition:all 0.3s}
+.nav-mobile{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.97);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:24px}
+.nav-mobile.open{display:flex}
+.nav-mobile a{color:#fff;font-size:1.3rem;font-weight:500}
+.nav-mobile-close{position:absolute;top:20px;right:24px;color:#fff;font-size:1.8rem;background:none;border:none;cursor:pointer}
+
+@media(max-width:768px){
+  .nav-links{display:none}
+  .nav-menu-btn{display:flex}
+}
+
+/* ===== HERO ===== */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;background:linear-gradient(180deg,#000000 0%,#050515 40%,#0a0a1a 100%);overflow:hidden}
+.hero-grid{position:absolute;top:0;left:0;right:0;bottom:0;background-image:
+  linear-gradient(rgba(0,163,255,0.03) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(0,163,255,0.03) 1px,transparent 1px);background-size:80px 80px;pointer-events:none}
+.hero-orbit{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+.hero-orbit-ring{position:absolute;border:1px solid rgba(0,163,255,0.06);border-radius:50%;top:50%;left:50%;transform:translate(-50%,-50%)}
+.hero-orbit-ring:nth-child(1){width:400px;height:400px;animation:orbit-spin 30s linear infinite}
+.hero-orbit-ring:nth-child(2){width:600px;height:600px;animation:orbit-spin 45s linear infinite reverse}
+.hero-orbit-ring:nth-child(3){width:800px;height:800px;animation:orbit-spin 60s linear infinite}
+.hero-orbit-dot{position:absolute;width:4px;height:4px;background:#00a3ff;border-radius:50%;top:-2px;left:50%;box-shadow:0 0 12px rgba(0,163,255,0.8)}
+@keyframes orbit-spin{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+
+.hero-content{position:relative;z-index:2;max-width:720px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,163,255,0.08);border:1px solid rgba(0,163,255,0.2);border-radius:100px;padding:8px 20px;margin-bottom:28px;color:#00a3ff;font-size:0.85rem;font-weight:600}
+.hero-badge svg{width:16px;height:16px}
+.hero h1{color:#fff;margin-bottom:20px}
+.hero h1 .accent{color:#00a3ff}
+.hero-sub{color:rgba(255,255,255,0.5);font-size:clamp(1rem,2vw,1.25rem);margin-bottom:36px;max-width:560px;font-weight:300}
+.hero-ctas{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:48px}
+
+/* Stats bar */
+.stats-bar{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.06);border-radius:12px;overflow:hidden;max-width:600px}
+.stat-item{padding:24px 20px;text-align:center;background:rgba(255,255,255,0.02)}
+.stat-value{font-size:1.6rem;font-weight:800;color:#00a3ff;margin-bottom:4px}
+.stat-label{font-size:0.8rem;color:rgba(255,255,255,0.4);font-weight:500;text-transform:uppercase;letter-spacing:0.05em}
+
+@media(max-width:600px){
+  .stats-bar{grid-template-columns:1fr;max-width:280px}
+  .hero-ctas{flex-direction:column;align-items:flex-start}
+}
+
+/* ===== PROBLEM SECTION ===== */
+.problem{background:#060620;position:relative}
+.problem::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,163,255,0.15),transparent)}
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.speed-compare{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:40px;backdrop-filter:blur(4px)}
+.speed-item{margin-bottom:28px}
+.speed-item:last-child{margin-bottom:0}
+.speed-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.speed-name{font-weight:600;font-size:0.95rem;color:rgba(255,255,255,0.7)}
+.speed-value{font-weight:700;font-size:0.95rem}
+.speed-bar{height:16px;border-radius:8px;background:rgba(255,255,255,0.06);overflow:hidden;position:relative}
+.speed-fill{height:100%;border-radius:8px;transition:width 1.5s ease;width:0}
+.speed-fill.etecsa{background:linear-gradient(90deg,#dc3545,#ff6b6b);width:3%}
+.speed-fill.cubalink{background:linear-gradient(90deg,#00a3ff,#00d4ff);width:100%}
+.speed-fill.animated{transition:width 1.5s cubic-bezier(0.4,0,0.2,1)}
+.speed-label{font-size:0.75rem;color:rgba(255,255,255,0.35);margin-top:6px}
+.problem-issues{display:flex;flex-direction:column;gap:16px;margin-top:32px}
+.issue-item{display:flex;align-items:flex-start;gap:14px;padding:16px;background:rgba(255,255,255,0.03);border-radius:10px;border-left:3px solid #dc3545;border:1px solid rgba(255,255,255,0.06);border-left:3px solid #dc3545}
+.issue-item svg{flex-shrink:0;width:22px;height:22px;color:#dc3545}
+.issue-text h4{font-size:0.95rem;font-weight:600;margin-bottom:2px;color:#fff}
+.issue-text p{font-size:0.85rem;color:rgba(255,255,255,0.45)}
+
+@media(max-width:768px){
+  .problem-grid{grid-template-columns:1fr;gap:40px}
+}
+
+/* ===== HOW IT WORKS ===== */
+.how-it-works{background:#000}
+.how-it-works::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,163,255,0.15),transparent)}
+.how-it-works{position:relative}
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;position:relative}
+.steps-grid::before{content:'';position:absolute;top:52px;left:16.66%;right:16.66%;height:2px;background:linear-gradient(90deg,#00a3ff,rgba(0,163,255,0.2));z-index:0}
+.step-card{text-align:center;position:relative;z-index:1}
+.step-icon{width:104px;height:104px;border-radius:50%;background:rgba(0,0,0,0.8);border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;position:relative;transition:all 0.4s}
+.step-card:hover .step-icon{border-color:#00a3ff;box-shadow:0 0 30px rgba(0,163,255,0.15)}
+.step-icon svg{width:40px;height:40px;color:#00a3ff}
+.step-number{position:absolute;top:-4px;right:-4px;width:32px;height:32px;background:#ff6b35;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.85rem;font-weight:700}
+.step-card h3{margin-bottom:8px;color:#fff}
+.step-card p{color:rgba(255,255,255,0.45);font-size:0.9rem}
+
+@media(max-width:768px){
+  .steps-grid{grid-template-columns:1fr;gap:40px}
+  .steps-grid::before{display:none}
+}
+
+/* ===== PLANS ===== */
+.plans{background:linear-gradient(180deg,#060620 0%,#0a0a1a 100%);color:#fff;position:relative;overflow:hidden}
+.plans::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 50% 0%,rgba(0,163,255,0.06) 0%,transparent 60%);pointer-events:none}
+.plans .section-label{color:#00a3ff}
+.plans .section-subtitle{color:rgba(255,255,255,0.4)}
+.plans-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative;z-index:1}
+.plan-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:36px 28px;transition:all 0.4s;display:flex;flex-direction:column}
+.plan-card:hover{transform:translateY(-8px);border-color:rgba(0,163,255,0.3);box-shadow:0 12px 40px rgba(0,0,0,0.4),0 0 30px rgba(0,163,255,0.1)}
+.plan-card.popular{background:rgba(0,163,255,0.06);border-color:rgba(0,163,255,0.3);position:relative;transform:scale(1.04)}
+.plan-card.popular:hover{transform:scale(1.04) translateY(-8px);box-shadow:0 12px 40px rgba(0,0,0,0.4),0 0 40px rgba(0,163,255,0.15)}
+.popular-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:#ff6b35;color:#fff;padding:4px 20px;border-radius:100px;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;white-space:nowrap}
+.plan-name{font-size:1.1rem;font-weight:600;color:rgba(255,255,255,0.6);margin-bottom:16px}
+.plan-price{font-size:2.8rem;font-weight:800;color:#fff;margin-bottom:4px}
+.plan-price small{font-size:0.9rem;font-weight:400;color:rgba(255,255,255,0.35)}
+.plan-speed{color:#00a3ff;font-weight:700;font-size:1.1rem;margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.plan-features{display:flex;flex-direction:column;gap:12px;margin-bottom:28px;flex:1}
+.plan-feature{display:flex;align-items:center;gap:10px;font-size:0.9rem;color:rgba(255,255,255,0.55)}
+.plan-feature svg{width:18px;height:18px;color:#00a3ff;flex-shrink:0}
+.plan-card .btn{width:100%;justify-content:center}
+.plans-note{text-align:center;margin-top:32px;color:rgba(255,255,255,0.35);font-size:0.9rem;position:relative;z-index:1}
+
+@media(max-width:960px){
+  .plans-grid{grid-template-columns:repeat(2,1fr);gap:16px}
+  .plan-card.popular{transform:scale(1)}
+  .plan-card.popular:hover{transform:translateY(-8px)}
+}
+@media(max-width:600px){
+  .plans-grid{grid-template-columns:1fr;max-width:400px;margin:0 auto}
+}
+
+/* ===== SATELLITE SIGNAL ANIMATION ===== */
+@keyframes signal-pulse{0%{stroke-dashoffset:20}100%{stroke-dashoffset:0}}
+@keyframes signal-blink{0%,100%{opacity:0.15}50%{opacity:0.7}}
+.signal-line{stroke:#00a3ff;stroke-width:1.2;fill:none;stroke-dasharray:6 4;animation:signal-pulse 1.5s linear infinite,signal-blink 2.5s ease-in-out infinite}
+.signal-line:nth-child(2){animation-delay:0.3s}
+.signal-line:nth-child(3){animation-delay:0.6s}
+.signal-line:nth-child(4){animation-delay:0.9s}
+.signal-line:nth-child(5){animation-delay:1.2s}
+
+/* ===== COVERAGE ===== */
+.coverage{background:#000;position:relative}
+.coverage::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,163,255,0.15),transparent)}
+.coverage-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.cuba-map-wrapper{position:relative;padding:40px}
+.cuba-map svg{width:100%;height:auto}
+.cuba-map .island{fill:none;stroke:#00a3ff;stroke-width:2;opacity:0.6}
+.cuba-map .island-fill{fill:rgba(0,163,255,0.06)}
+.map-dot{position:absolute;width:10px;height:10px;background:#ff6b35;border-radius:50%;box-shadow:0 0 0 4px rgba(255,107,53,0.2);animation:map-pulse 2s ease infinite}
+@keyframes map-pulse{0%,100%{box-shadow:0 0 0 4px rgba(255,107,53,0.2)}50%{box-shadow:0 0 0 8px rgba(255,107,53,0.05)}}
+.cities-list{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:24px}
+.city-item{display:flex;align-items:center;gap:8px;font-size:0.9rem;color:rgba(255,255,255,0.5)}
+.city-item svg{width:14px;height:14px;color:#00a3ff;flex-shrink:0}
+.coverage-features{display:flex;flex-direction:column;gap:20px}
+.coverage-feature{display:flex;align-items:flex-start;gap:16px;padding:20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:12px;transition:all 0.3s}
+.coverage-feature:hover{border-color:rgba(0,163,255,0.2);box-shadow:0 0 20px rgba(0,163,255,0.05)}
+.coverage-feature-icon{width:48px;height:48px;background:rgba(0,163,255,0.1);border:1px solid rgba(0,163,255,0.2);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.coverage-feature-icon svg{width:24px;height:24px;color:#00a3ff}
+.coverage-feature h4{font-weight:600;margin-bottom:4px;color:#fff}
+.coverage-feature p{font-size:0.9rem;color:rgba(255,255,255,0.45)}
+
+@media(max-width:768px){
+  .coverage-grid{grid-template-columns:1fr;gap:40px}
+}
+
+/* ===== WHY CUBALINK ===== */
+.why{background:#060620;position:relative}
+.why::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,163,255,0.15),transparent)}
+/* Subtle grid overlay */
+.why::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background-image:
+  linear-gradient(rgba(0,163,255,0.02) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(0,163,255,0.02) 1px,transparent 1px);background-size:60px 60px;pointer-events:none}
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;position:relative;z-index:1}
+.why-card{background:rgba(255,255,255,0.03);border-radius:16px;padding:36px 28px;text-align:center;border:1px solid rgba(255,255,255,0.06);transition:all 0.4s}
+.why-card:hover{transform:translateY(-8px);box-shadow:0 12px 40px rgba(0,0,0,0.3),0 0 30px rgba(0,163,255,0.1);border-color:rgba(0,163,255,0.3)}
+.why-icon{width:72px;height:72px;background:rgba(0,163,255,0.08);border:1px solid rgba(0,163,255,0.15);border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;transition:all 0.3s}
+.why-card:hover .why-icon{box-shadow:0 0 25px rgba(0,163,255,0.15);border-color:rgba(0,163,255,0.4)}
+.why-icon svg{width:32px;height:32px;color:#00a3ff}
+.why-card h3{margin-bottom:8px;color:#fff}
+.why-card p{color:rgba(255,255,255,0.45);font-size:0.9rem}
+
+@media(max-width:960px){.why-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.why-grid{grid-template-columns:1fr}}
+
+/* ===== ABOUT ===== */
+.about{background:#000;position:relative}
+.about::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,163,255,0.15),transparent)}
+.about-inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.about-visual{position:relative;background:linear-gradient(135deg,#060620,#0a0a2a);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:60px 40px;text-align:center;overflow:hidden}
+.about-visual::before{content:'';position:absolute;top:-50%;right:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(0,163,255,0.06) 0%,transparent 60%);pointer-events:none}
+.about-visual svg{width:120px;height:120px;margin:0 auto 24px;position:relative;z-index:1}
+.about-visual-text{color:#fff;font-size:1.4rem;font-weight:700;position:relative;z-index:1}
+.about-visual-sub{color:rgba(255,255,255,0.35);font-size:0.9rem;margin-top:8px;position:relative;z-index:1}
+.about-text h2{margin-bottom:20px;color:#fff}
+.about-text p{color:rgba(255,255,255,0.5);margin-bottom:16px}
+.about-values{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+.about-value{display:flex;align-items:center;gap:10px;font-size:0.9rem;font-weight:500;color:rgba(255,255,255,0.7)}
+.about-value svg{width:20px;height:20px;color:#00a3ff}
+
+@media(max-width:768px){
+  .about-inner{grid-template-columns:1fr;gap:40px}
+}
+
+/* ===== FAQ ===== */
+.faq{background:#060620;position:relative}
+.faq::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,163,255,0.15),transparent)}
+.faq-list{max-width:760px;margin:0 auto}
+.faq-item{background:rgba(255,255,255,0.03);border-radius:12px;margin-bottom:12px;border:1px solid rgba(255,255,255,0.06);overflow:hidden;transition:border-color 0.3s}
+.faq-item.open{border-color:rgba(0,163,255,0.3);box-shadow:0 0 20px rgba(0,163,255,0.05)}
+.faq-question{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;cursor:pointer;font-weight:600;font-size:1rem;gap:16px;transition:color 0.2s;color:rgba(255,255,255,0.8)}
+.faq-item.open .faq-question{color:#fff}
+.faq-arrow{width:24px;height:24px;flex-shrink:0;transition:transform 0.3s;color:rgba(255,255,255,0.3)}
+.faq-item.open .faq-arrow{transform:rotate(180deg);color:#00a3ff}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.3s ease}
+.faq-answer-inner{padding:0 24px 20px;color:rgba(255,255,255,0.5);font-size:0.95rem;line-height:1.7}
+.faq-item.open .faq-answer{max-height:300px}
+
+/* ===== COMING SOON / CTA ===== */
+.cta-section{background:linear-gradient(180deg,#000 0%,#060620 50%,#000 100%);color:#fff;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 30% 50%,rgba(0,163,255,0.06) 0%,transparent 50%),radial-gradient(circle at 70% 50%,rgba(255,107,53,0.03) 0%,transparent 50%);pointer-events:none}
+.cta-inner{position:relative;z-index:1;text-align:center;max-width:640px;margin:0 auto}
+.cta-inner h2{color:#fff;margin-bottom:16px}
+.cta-inner>p{color:rgba(255,255,255,0.45);margin-bottom:40px}
+.cta-form{display:flex;gap:12px;max-width:480px;margin:0 auto 20px}
+.cta-input{flex:1;padding:14px 20px;border:1px solid rgba(255,255,255,0.1);border-radius:8px;background:rgba(255,255,255,0.04);color:#fff;font-size:1rem;outline:none;transition:all 0.3s}
+.cta-input::placeholder{color:rgba(255,255,255,0.25)}
+.cta-input:focus{border-color:#00a3ff;box-shadow:0 0 20px rgba(0,163,255,0.1)}
+.cta-form .btn{white-space:nowrap}
+.cta-disclaimer{font-size:0.8rem;color:rgba(255,255,255,0.25)}
+
+@media(max-width:500px){
+  .cta-form{flex-direction:column}
+}
+
+/* ===== FOOTER ===== */
+.footer{background:#000;color:rgba(255,255,255,0.45);padding:60px 0 0;border-top:1px solid rgba(255,255,255,0.05)}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,0.05)}
+.footer-brand{display:flex;flex-direction:column;gap:16px}
+.footer-brand .nav-logo{font-size:1.3rem}
+.footer-brand p{font-size:0.9rem;max-width:280px}
+.footer-heading{font-size:0.85rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.7);margin-bottom:16px}
+.footer-links a{display:block;padding:4px 0;font-size:0.9rem;transition:color 0.2s}
+.footer-links a:hover{color:#00a3ff}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding:24px 0;font-size:0.8rem}
+.footer-starlink{display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.3);font-size:0.8rem}
+.footer-starlink svg{width:16px;height:16px}
+
+@media(max-width:768px){
+  .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
+  .footer-bottom{flex-direction:column;gap:12px;text-align:center}
+}
+@media(max-width:500px){
+  .footer-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo">
+      <img src="logo.png" alt="CubaLink" style="height:44px;width:44px;border-radius:50%;object-fit:cover">
+      CubaLink
+    </a>
+    <div class="nav-links">
+      <a href="#problem"><span class="lang" data-es="El Problema" data-en="The Problem"></span></a>
+      <a href="#how"><span class="lang" data-es="Como Funciona" data-en="How It Works"></span></a>
+      <a href="#plans"><span class="lang" data-es="Planes" data-en="Plans"></span></a>
+      <a href="#coverage"><span class="lang" data-es="Cobertura" data-en="Coverage"></span></a>
+      <a href="#faq">FAQ</a>
+      <div class="lang-toggle">
+        <button class="lang-btn" data-lang="es" id="btn-es">ES</button>
+        <button class="lang-btn" data-lang="en" id="btn-en">EN</button>
+      </div>
+    </div>
+    <button class="nav-menu-btn" id="menuBtn" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="nav-mobile" id="mobileNav">
+  <button class="nav-mobile-close" id="mobileClose" aria-label="Close menu">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <a href="#problem" class="mobile-link"><span class="lang" data-es="El Problema" data-en="The Problem"></span></a>
+  <a href="#how" class="mobile-link"><span class="lang" data-es="Como Funciona" data-en="How It Works"></span></a>
+  <a href="#plans" class="mobile-link"><span class="lang" data-es="Planes" data-en="Plans"></span></a>
+  <a href="#coverage" class="mobile-link"><span class="lang" data-es="Cobertura" data-en="Coverage"></span></a>
+  <a href="#faq" class="mobile-link">FAQ</a>
+  <div class="lang-toggle" style="margin-top:20px">
+    <button class="lang-btn" data-lang="es" onclick="setLang('es')">ES</button>
+    <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+  </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="hero-grid"></div>
+
+  <!-- Animated star field -->
+  <div class="starfield" id="starfield"></div>
+
+  <!-- Satellite trails -->
+  <div class="satellite-trail"></div>
+  <div class="satellite-trail-3"></div>
+
+  <div class="hero-orbit">
+    <div class="hero-orbit-ring"><div class="hero-orbit-dot"></div></div>
+    <div class="hero-orbit-ring"><div class="hero-orbit-dot"></div></div>
+    <div class="hero-orbit-ring"><div class="hero-orbit-dot"></div></div>
+  </div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        <span class="lang" data-es="Proximamente" data-en="Coming Soon"></span>
+      </div>
+      <h1><span class="lang" data-es="Internet <span class='accent'>sin limites</span> para Cuba" data-en="<span class='accent'>Unlimited</span> Internet for Cuba"></span></h1>
+      <p class="hero-sub"><span class="lang" data-es="Internet satelital de alta velocidad para hogares y negocios en toda Cuba. Conectividad confiable donde antes no era posible." data-en="High-speed satellite internet for homes and businesses across Cuba. Reliable connectivity where it was never possible before."></span></p>
+      <div class="hero-ctas">
+        <a href="#cta" class="btn btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span class="lang" data-es="Contactenos" data-en="Contact Us"></span>
+        </a>
+        <a href="#plans" class="btn btn-secondary">
+          <span class="lang" data-es="Ver Planes" data-en="View Plans"></span>
+        </a>
+      </div>
+      <div class="stats-bar">
+        <div class="stat-item">
+          <div class="stat-value">400<small>Mbps</small></div>
+          <div class="stat-label"><span class="lang" data-es="Velocidad Max" data-en="Max Speed"></span></div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">100%</div>
+          <div class="stat-label"><span class="lang" data-es="Cobertura Nacional" data-en="Nationwide Coverage"></span></div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">0</div>
+          <div class="stat-label"><span class="lang" data-es="Cables Necesarios" data-en="Cables Needed"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Earth atmosphere glow line -->
+  <div class="earth-glow"></div>
+</section>
+
+<!-- ===== THE PROBLEM ===== -->
+<section class="problem section-pad" id="problem">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:56px">
+      <div class="section-label reveal"><span class="lang" data-es="El Problema" data-en="The Problem"></span></div>
+      <h2 class="section-title reveal"><span class="lang" data-es="Cuba merece mejor internet" data-en="Cuba Deserves Better Internet"></span></h2>
+      <p class="section-subtitle reveal"><span class="lang" data-es="Durante decadas, los cubanos han sufrido una de las peores conexiones a internet del mundo. Es hora de cambiar eso." data-en="For decades, Cubans have endured some of the worst internet connectivity in the world. It's time to change that."></span></p>
+    </div>
+    <div class="problem-grid">
+      <div class="reveal-left">
+        <div class="speed-compare">
+          <h3 style="margin-bottom:28px;color:#fff"><span class="lang" data-es="Comparacion de Velocidad" data-en="Speed Comparison"></span></h3>
+          <div class="speed-item">
+            <div class="speed-header">
+              <span class="speed-name">ETECSA</span>
+              <span class="speed-value" style="color:#dc3545">&lt; 3 Mbps</span>
+            </div>
+            <div class="speed-bar"><div class="speed-fill etecsa" id="bar-etecsa"></div></div>
+            <div class="speed-label"><span class="lang" data-es="Velocidad promedio actual en Cuba" data-en="Current average speed in Cuba"></span></div>
+          </div>
+          <div class="speed-item">
+            <div class="speed-header">
+              <span class="speed-name" style="color:#00a3ff;font-weight:700">CubaLink</span>
+              <span class="speed-value" style="color:#00a3ff">100-400 Mbps</span>
+            </div>
+            <div class="speed-bar"><div class="speed-fill cubalink" id="bar-cubalink"></div></div>
+            <div class="speed-label"><span class="lang" data-es="Internet satelital de alta velocidad via Starlink" data-en="High-speed satellite internet via Starlink"></span></div>
+          </div>
+          <div style="text-align:center;margin-top:24px;padding:16px;background:rgba(0,163,255,0.06);border:1px solid rgba(0,163,255,0.15);border-radius:8px">
+            <span style="font-weight:700;color:#00a3ff;font-size:1.4rem">133x</span>
+            <span style="color:rgba(255,255,255,0.5);font-size:0.9rem;margin-left:8px"><span class="lang" data-es="mas rapido" data-en="faster"></span></span>
+          </div>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <h3 style="margin-bottom:24px;color:#fff"><span class="lang" data-es="Problemas actuales" data-en="Current Issues"></span></h3>
+        <div class="problem-issues">
+          <div class="issue-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+            <div class="issue-text">
+              <h4><span class="lang" data-es="Velocidades extremadamente lentas" data-en="Extremely slow speeds"></span></h4>
+              <p><span class="lang" data-es="Promedio menor a 3 Mbps, insuficiente para videollamadas o streaming" data-en="Average under 3 Mbps, insufficient for video calls or streaming"></span></p>
+            </div>
+          </div>
+          <div class="issue-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+            <div class="issue-text">
+              <h4><span class="lang" data-es="Costos elevados" data-en="High costs"></span></h4>
+              <p><span class="lang" data-es="Precios desproporcionados para un servicio de baja calidad" data-en="Disproportionate prices for low-quality service"></span></p>
+            </div>
+          </div>
+          <div class="issue-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+            <div class="issue-text">
+              <h4><span class="lang" data-es="Conexion inestable" data-en="Unreliable connection"></span></h4>
+              <p><span class="lang" data-es="Interrupciones frecuentes y cobertura limitada fuera de las ciudades" data-en="Frequent outages and limited coverage outside cities"></span></p>
+            </div>
+          </div>
+          <div class="issue-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+            <div class="issue-text">
+              <h4><span class="lang" data-es="Sin alternativas reales" data-en="No real alternatives"></span></h4>
+              <p><span class="lang" data-es="Un solo proveedor estatal sin competencia ni incentivos para mejorar" data-en="A single state provider with no competition or incentive to improve"></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section class="how-it-works section-pad" id="how">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:56px">
+      <div class="section-label reveal"><span class="lang" data-es="Como Funciona" data-en="How It Works"></span></div>
+      <h2 class="section-title reveal"><span class="lang" data-es="Tres pasos para conectarse" data-en="Three steps to get connected"></span></h2>
+      <p class="section-subtitle reveal"><span class="lang" data-es="Hemos simplificado todo el proceso para que obtener internet de alta velocidad sea facil." data-en="We've simplified the entire process so getting high-speed internet is easy."></span></p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card reveal">
+        <div class="step-icon">
+          <span class="step-number">1</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+        </div>
+        <h3><span class="lang" data-es="Suscribase" data-en="Subscribe"></span></h3>
+        <p><span class="lang" data-es="Elija su plan y registrese en linea. Le asignaremos una fecha de instalacion." data-en="Choose your plan and sign up online. We'll assign you an installation date."></span></p>
+      </div>
+      <div class="step-card reveal" style="transition-delay:0.15s">
+        <div class="step-icon">
+          <span class="step-number">2</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <h3><span class="lang" data-es="Instalacion" data-en="Installation"></span></h3>
+        <p><span class="lang" data-es="Nuestro equipo profesional instala y configura todo el equipo en su ubicacion." data-en="Our professional team installs and configures all equipment at your location."></span></p>
+      </div>
+      <div class="step-card reveal" style="transition-delay:0.3s">
+        <div class="step-icon">
+          <span class="step-number">3</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+        </div>
+        <h3><span class="lang" data-es="Conectese" data-en="Connect"></span></h3>
+        <p><span class="lang" data-es="Disfrute de internet de alta velocidad inmediatamente. Soporte tecnico incluido." data-en="Enjoy high-speed internet immediately. Technical support included."></span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PLANS ===== -->
+<section class="plans section-pad" id="plans">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:56px">
+      <div class="section-label reveal"><span class="lang" data-es="Planes y Precios" data-en="Plans & Pricing"></span></div>
+      <h2 class="section-title reveal" style="color:#fff"><span class="lang" data-es="Un plan para cada necesidad" data-en="A plan for every need"></span></h2>
+      <p class="section-subtitle reveal"><span class="lang" data-es="Todos los planes incluyen equipo, instalacion y soporte tecnico 24/7." data-en="All plans include equipment, installation, and 24/7 technical support."></span></p>
+    </div>
+    <div class="plans-grid">
+      <!-- Basic -->
+      <div class="plan-card reveal">
+        <div class="plan-name"><span class="lang" data-es="Hogar Basico" data-en="Basic Home"></span></div>
+        <div class="plan-price">$60<small>/mes</small></div>
+        <div class="plan-speed">100 Mbps</div>
+        <div class="plan-features">
+          <div class="plan-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><polyline points="20 6 9 17 4 12"/></svg><span class="lang" data-es="Ideal para 1-3 dispositivos" data-en="Ideal for 1-3 devices"></span></div>
+          <div class="plan-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><polyline points="20 6 9 17 4 12"/></svg><span class="lang" data-es="Streaming en HD" data-en="HD streaming"></span></div>
+          <div class="plan-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><polyline points="20 6 9 17 4 12"/></svg><span class="lang" data-es="Equipo incluido" data-en="Equipment included"></span></div>
+          <div class="plan-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><polyline points="20 6 9 17 4 12"/></svg><span class="lang" data-es="Soporte 24/7" data-en="24/7 support"></span></div>
+        </div>
+        <a href="#cta" class="btn btn-secondary"><span class="lang" data-es="Reservar" data-en="Reserve"></span></a>
+      </div>
+      <!-- Premium (Popular) -->
+      <div class="plan-card popular reveal" style="transition-delay:0.1s">
+        <div class="popular-badge"><span class="lang" data-es="Mas Popular" data-en="Most Popular"></span></div>
+        <div class="plan-name"><span class="lang" data-es="Hogar Premium" data-en="Premium Home"></span></div>
+        <div class="plan-price">$85<small>/mes</small></div>
+        <div class="plan-speed">200 Mbps</div>
+        <div class="plan-features">
+          <div class="plan-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><polyline points="20 6 9 17 4 12"/></svg><span class="lang" data-es="Ideal para 3-8 dispositivos" data-en="Ideal for 3-8 devices"></span></div>
+          <div class="plan-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><polyline points="20 6 9 17 4 12"/></svg><span class="lang" data-es="Streaming en 4K" data-en="4K streaming"></span></div>
+          <div class="plan-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><polyline points="20 6 9 17 4 12"/></svg><span class="lang" data-es="Equipo incluido" data-en="Equipment included"></span></div>
+          <div class="plan-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><polyline points="20 6 9 17 4 12"/></svg><span class="lang" data-es="Soporte prioritario 24/7" data-en="Priority 24/7 support"></span></div>
+          <div class="plan-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><polyline points="20 6 9 17 4 12"/></svg><span class="lang" data-es="Videollamadas sin cortes" data-en="Seamless video calls"></span></div>
+        </div>
+        <a href="#cta" class="btn btn-primary"><span class="lang" data-es="Reservar" data-en="Reserve"></span></a>
+      </div>
+      <!-- Business -->
+      <div class="plan-card reveal" style="transition-delay:0.2s">
+        <div class="plan-name"><span class="lang" data-es="Negocio" data-en="Business"></span></div>
+        <div class="plan-price">$120<small>/mes</small></div>
+        <div class="plan-speed">300 Mbps</div>
+        <div class="plan-features">
+          <div class="plan-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><polyline points="20 6 9 17 4 12"/></svg><span class="lang" data-es="Ideal para 8-20 dispositivos" data-en="Ideal for 8-20 devices"></span></div>
+          <div class="plan-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><polyline points="20 6 9 17 4 12"/></svg><span class="lang" data-es="IP estatica disponible" data-en="Static IP available"></span></div>
+          <div class="plan-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><polyline points="20 6 9 17 4 12"/></svg><span class="lang" data-es="Equipo comercial incluido" data-en="Commercial equipment included"></span></div>
+          <div class="plan-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><polyline points="20 6 9 17 4 12"/></svg><span class="lang" data-es="Gerente de cuenta dedicado" data-en="Dedicated account manager"></span></div>
+        </div>
+        <a href="#cta" class="btn btn-secondary"><span class="lang" data-es="Reservar" data-en="Reserve"></span></a>
+      </div>
+      <!-- Enterprise -->
+      <div class="plan-card reveal" style="transition-delay:0.3s">
+        <div class="plan-name"><span class="lang" data-es="Empresa" data-en="Enterprise"></span></div>
+        <div class="plan-price">$200<small>/mes</small></div>
+        <div class="plan-speed">400 Mbps</div>
+        <div class="plan-features">
+          <div class="plan-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><polyline points="20 6 9 17 4 12"/></svg><span class="lang" data-es="Dispositivos ilimitados" data-en="Unlimited devices"></span></div>
+          <div class="plan-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><polyline points="20 6 9 17 4 12"/></svg><span class="lang" data-es="SLA garantizado 99.9%" data-en="99.9% SLA guaranteed"></span></div>
+          <div class="plan-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><polyline points="20 6 9 17 4 12"/></svg><span class="lang" data-es="Multiples puntos de acceso" data-en="Multiple access points"></span></div>
+          <div class="plan-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><polyline points="20 6 9 17 4 12"/></svg><span class="lang" data-es="Soporte tecnico en sitio" data-en="On-site technical support"></span></div>
+          <div class="plan-feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><polyline points="20 6 9 17 4 12"/></svg><span class="lang" data-es="Facturacion personalizada" data-en="Custom billing"></span></div>
+        </div>
+        <a href="#cta" class="btn btn-secondary"><span class="lang" data-es="Contactar Ventas" data-en="Contact Sales"></span></a>
+      </div>
+    </div>
+    <p class="plans-note reveal">
+      <svg style="display:inline;width:16px;height:16px;vertical-align:middle;margin-right:6px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <span class="lang" data-es="Todos los precios en USD. Equipo Starlink incluido en la suscripcion. Sin cargos ocultos." data-en="All prices in USD. Starlink equipment included in subscription. No hidden fees."></span>
+    </p>
+  </div>
+</section>
+
+<!-- ===== COVERAGE ===== -->
+<section class="coverage section-pad" id="coverage">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:56px">
+      <div class="section-label reveal"><span class="lang" data-es="Cobertura" data-en="Coverage"></span></div>
+      <h2 class="section-title reveal"><span class="lang" data-es="Cobertura nacional desde el dia uno" data-en="Nationwide coverage from day one"></span></h2>
+      <p class="section-subtitle reveal"><span class="lang" data-es="Internet satelital llega a toda la isla. Sin necesidad de infraestructura terrestre." data-en="Satellite internet reaches the entire island. No ground infrastructure needed."></span></p>
+    </div>
+    <div class="coverage-grid">
+      <div class="reveal-left" style="grid-column:1/-1">
+        <div style="position:relative;width:100%;max-width:900px;margin:0 auto">
+          <!-- Cuba map — blue outline on black, with CSS overlay dots -->
+          <div style="position:relative">
+            <img src="cuba-coverage.png" alt="Cuba" style="width:100%;display:block;border-radius:12px">
+            <!-- SVG overlay — satellite + signal lines + city dots -->
+            <svg style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none" viewBox="0 0 1519 704">
+              <!-- Satellite upper right -->
+              <g transform="translate(1150,100)">
+                <rect x="-12" y="-8" width="24" height="16" rx="3" stroke="#00a3ff" stroke-width="2" fill="rgba(0,163,255,0.2)"/>
+                <rect x="-40" y="-12" width="26" height="24" rx="2" stroke="#00a3ff" stroke-width="1.5" fill="rgba(0,163,255,0.1)"/>
+                <rect x="14" y="-12" width="26" height="24" rx="2" stroke="#00a3ff" stroke-width="1.5" fill="rgba(0,163,255,0.1)"/>
+                <line x1="0" y1="8" x2="0" y2="20" stroke="#00a3ff" stroke-width="2"/>
+                <circle cx="0" cy="22" r="4" fill="#00a3ff"/>
+                <path d="M-10 28 Q0 38 10 28" stroke="#00a3ff" stroke-width="1.2" fill="none" opacity="0.6"/>
+              </g>
+              <!-- Signal lines from satellite to cities — curved, animated dashes -->
+              <!-- Signal lines from satellite (1150,70) to cities — Gemini Flash coordinates -->
+              <!-- Signal lines from satellite (1150,70) to ALL 8 city dots -->
+              <!-- Pinar (300,310) — curved left to avoid overlapping Havana line -->
+              <path d="M1090 136 Q500 80 300 310" fill="none" stroke="#00a3ff" stroke-width="1" stroke-dasharray="10 8" opacity="0.3"><animate attributeName="stroke-dashoffset" values="0;-36" dur="2s" repeatCount="indefinite"/></path>
+              <!-- La Habana (440,260) -->
+              <path d="M1090 136 Q700 150 440 260" fill="none" stroke="#00a3ff" stroke-width="1" stroke-dasharray="10 8" opacity="0.3"><animate attributeName="stroke-dashoffset" values="0;-36" dur="2s" repeatCount="indefinite"/></path>
+              <!-- Varadero (560,260) -->
+              <path d="M1090 136 Q780 140 560 260" fill="none" stroke="#00a3ff" stroke-width="1" stroke-dasharray="10 8" opacity="0.3"><animate attributeName="stroke-dashoffset" values="0;-36" dur="2s" repeatCount="indefinite"/></path>
+              <!-- Santa Clara (670,305) -->
+              <path d="M1090 136 Q850 170 670 305" fill="none" stroke="#00a3ff" stroke-width="1" stroke-dasharray="10 8" opacity="0.3"><animate attributeName="stroke-dashoffset" values="0;-36" dur="2s" repeatCount="indefinite"/></path>
+              <!-- Camaguey (910,395) -->
+              <path d="M1090 136 Q980 210 910 395" fill="none" stroke="#00a3ff" stroke-width="1" stroke-dasharray="10 8" opacity="0.3"><animate attributeName="stroke-dashoffset" values="0;-36" dur="2s" repeatCount="indefinite"/></path>
+              <!-- Holguin (1130,443) -->
+              <path d="M1090 136 Q1110 290 1130 443" fill="none" stroke="#00a3ff" stroke-width="1" stroke-dasharray="10 8" opacity="0.3"><animate attributeName="stroke-dashoffset" values="0;-36" dur="2s" repeatCount="indefinite"/></path>
+              <!-- Bayamo (1043,493) -->
+              <path d="M1090 136 Q1020 260 1043 493" fill="none" stroke="#00a3ff" stroke-width="1" stroke-dasharray="10 8" opacity="0.3"><animate attributeName="stroke-dashoffset" values="0;-36" dur="2s" repeatCount="indefinite"/></path>
+              <!-- Santiago (1153,532) -->
+              <path d="M1090 136 Q1200 280 1153 532" fill="none" stroke="#00a3ff" stroke-width="1" stroke-dasharray="10 8" opacity="0.3"><animate attributeName="stroke-dashoffset" values="0;-36" dur="2s" repeatCount="indefinite"/></path>
+              <!-- City dots — Gemini Flash v2 coordinates on 1519x704 image -->
+              <!-- Pinar del Rio -->
+              <circle cx="300" cy="310" r="7" fill="#ff6b35"><animate attributeName="r" values="7;10;7" dur="2.4s" repeatCount="indefinite"/></circle>
+              <!-- La Habana -->
+              <circle cx="440" cy="260" r="8" fill="#ff6b35"><animate attributeName="r" values="8;11;8" dur="2s" repeatCount="indefinite"/></circle>
+              <!-- Varadero -->
+              <circle cx="560" cy="260" r="6" fill="#ff6b35"><animate attributeName="r" values="6;9;6" dur="2.3s" repeatCount="indefinite"/></circle>
+              <!-- Santa Clara -->
+              <circle cx="670" cy="305" r="7" fill="#ff6b35"><animate attributeName="r" values="7;10;7" dur="2.7s" repeatCount="indefinite"/></circle>
+              <!-- Camaguey -->
+              <circle cx="910" cy="395" r="7" fill="#ff6b35"><animate attributeName="r" values="7;10;7" dur="2.5s" repeatCount="indefinite"/></circle>
+              <!-- Holguin -->
+              <circle cx="1130" cy="443" r="7" fill="#ff6b35"><animate attributeName="r" values="7;10;7" dur="2.1s" repeatCount="indefinite"/></circle>
+              <!-- Bayamo -->
+              <circle cx="1043" cy="493" r="6" fill="#ff6b35"><animate attributeName="r" values="6;9;6" dur="2.2s" repeatCount="indefinite"/></circle>
+              <!-- Santiago -->
+              <circle cx="1153" cy="532" r="8" fill="#ff6b35"><animate attributeName="r" values="8;11;8" dur="1.8s" repeatCount="indefinite"/></circle>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="coverage-features">
+          <div class="coverage-feature">
+            <div class="coverage-feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <div>
+              <h4><span class="lang" data-es="Tecnologia satelital" data-en="Satellite technology"></span></h4>
+              <p><span class="lang" data-es="No requiere cables, torres o infraestructura terrestre. La senal llega directamente desde los satelites Starlink en orbita baja." data-en="No cables, towers, or ground infrastructure required. Signal comes directly from Starlink satellites in low Earth orbit."></span></p>
+            </div>
+          </div>
+          <div class="coverage-feature">
+            <div class="coverage-feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <div>
+              <h4><span class="lang" data-es="Cobertura total de la isla" data-en="Full island coverage"></span></h4>
+              <p><span class="lang" data-es="Desde La Habana hasta Santiago de Cuba, y cada pueblo entre ellos. Areas rurales y urbanas por igual." data-en="From Havana to Santiago de Cuba, and every town in between. Rural and urban areas alike."></span></p>
+            </div>
+          </div>
+          <div class="coverage-feature">
+            <div class="coverage-feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </div>
+            <div>
+              <h4><span class="lang" data-es="Baja latencia" data-en="Low latency"></span></h4>
+              <p><span class="lang" data-es="Orbita baja terrestre significa latencia de 20-40ms. Perfecto para videollamadas, gaming y trabajo remoto." data-en="Low Earth orbit means 20-40ms latency. Perfect for video calls, gaming, and remote work."></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHY CUBALINK ===== -->
+<section class="why section-pad" id="why">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:56px;position:relative;z-index:1">
+      <div class="section-label reveal"><span class="lang" data-es="Por Que CubaLink" data-en="Why CubaLink"></span></div>
+      <h2 class="section-title reveal"><span class="lang" data-es="Disenado para Cuba" data-en="Designed for Cuba"></span></h2>
+      <p class="section-subtitle reveal"><span class="lang" data-es="No somos solo un proveedor de internet. Entendemos las necesidades unicas de conectar a Cuba con el mundo." data-en="We're not just an internet provider. We understand the unique needs of connecting Cuba to the world."></span></p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        </div>
+        <h3><span class="lang" data-es="Pago local" data-en="Local payment"></span></h3>
+        <p><span class="lang" data-es="Multiples opciones de pago accesibles. Pague en USD desde Miami o con opciones locales en Cuba." data-en="Multiple accessible payment options. Pay in USD from Miami or with local options in Cuba."></span></p>
+      </div>
+      <div class="why-card reveal" style="transition-delay:0.1s">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+        </div>
+        <h3><span class="lang" data-es="Soporte en espanol 24/7" data-en="24/7 Spanish support"></span></h3>
+        <p><span class="lang" data-es="Atencion al cliente completamente en espanol. Nuestro equipo entiende su cultura y necesidades." data-en="Fully Spanish-speaking customer service. Our team understands your culture and needs."></span></p>
+      </div>
+      <div class="why-card reveal" style="transition-delay:0.2s">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3><span class="lang" data-es="Sin compra de equipo" data-en="No equipment purchase"></span></h3>
+        <p><span class="lang" data-es="El equipo Starlink esta incluido en su suscripcion mensual. Sin inversion inicial grande." data-en="Starlink equipment is included in your monthly subscription. No large upfront investment."></span></p>
+      </div>
+      <div class="why-card reveal" style="transition-delay:0.3s">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <h3><span class="lang" data-es="Instalacion profesional" data-en="Professional installation"></span></h3>
+        <p><span class="lang" data-es="Tecnicos certificados instalan y configuran todo. Usted solo se conecta y navega." data-en="Certified technicians install and configure everything. You just connect and browse."></span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="about section-pad" id="about">
+  <div class="container">
+    <div class="about-inner">
+      <div class="about-visual reveal-left">
+        <svg viewBox="0 0 120 120" fill="none" stroke="#00a3ff" stroke-width="1.5" stroke-linecap="round" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="60" cy="60" r="50" opacity="0.3"/>
+          <circle cx="60" cy="60" r="35" opacity="0.5"/>
+          <ellipse cx="60" cy="60" rx="50" ry="20" opacity="0.3"/>
+          <ellipse cx="60" cy="60" rx="35" ry="50" opacity="0.3"/>
+          <path d="M40 80 Q60 30 90 55" stroke-width="2.5" opacity="0.9"/>
+          <circle cx="42" cy="78" r="4" fill="#00a3ff" stroke="none"/>
+          <path d="M42 78 L35 88" stroke-width="2"/>
+          <circle cx="60" cy="60" r="3" fill="#ff6b35" stroke="none"><animate attributeName="opacity" values="1;0.4;1" dur="2s" repeatCount="indefinite"/></circle>
+        </svg>
+        <div class="about-visual-text"><span class="lang" data-es="Conectando a Cuba con el mundo" data-en="Connecting Cuba to the world"></span></div>
+        <div class="about-visual-sub">Miami, FL — La Habana, Cuba</div>
+      </div>
+      <div class="about-text reveal-right">
+        <div class="section-label"><span class="lang" data-es="Sobre Nosotros" data-en="About Us"></span></div>
+        <h2><span class="lang" data-es="Una empresa cubanoamericana con una mision clara" data-en="A Cuban-American company with a clear mission"></span></h2>
+        <p><span class="lang" data-es="CubaLink es una empresa con sede en Miami, Florida, fundada por cubanoamericanos que entienden la necesidad critica de conectividad confiable en Cuba." data-en="CubaLink is a company based in Miami, Florida, founded by Cuban-Americans who understand the critical need for reliable connectivity in Cuba."></span></p>
+        <p><span class="lang" data-es="Como revendedor autorizado de Starlink, llevamos la mejor tecnologia satelital del mundo directamente a hogares y negocios en toda la isla." data-en="As an authorized Starlink reseller, we bring the world's best satellite technology directly to homes and businesses across the island."></span></p>
+        <div class="about-values">
+          <div class="about-value">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span class="lang" data-es="Empresa registrada en EE.UU." data-en="US-registered company"></span>
+          </div>
+          <div class="about-value">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span class="lang" data-es="Equipo bilingue" data-en="Bilingual team"></span>
+          </div>
+          <div class="about-value">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span class="lang" data-es="Revendedor autorizado Starlink" data-en="Authorized Starlink reseller"></span>
+          </div>
+          <div class="about-value">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span class="lang" data-es="Compromiso con Cuba" data-en="Committed to Cuba"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="faq section-pad" id="faq">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:56px">
+      <div class="section-label reveal"><span class="lang" data-es="Preguntas Frecuentes" data-en="FAQ"></span></div>
+      <h2 class="section-title reveal"><span class="lang" data-es="Respuestas a sus preguntas" data-en="Answers to your questions"></span></h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <div class="faq-question">
+          <span class="lang" data-es="Que velocidad de internet puedo esperar?" data-en="What internet speed can I expect?"></span>
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner"><span class="lang" data-es="Dependiendo de su plan, puede esperar velocidades de descarga entre 100 y 400 Mbps, con latencia de 20-40ms. Esto es suficiente para streaming en 4K, videollamadas de alta calidad, gaming en linea y trabajo remoto sin interrupciones." data-en="Depending on your plan, you can expect download speeds between 100 and 400 Mbps, with 20-40ms latency. This is sufficient for 4K streaming, high-quality video calls, online gaming, and uninterrupted remote work."></span></div>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-question">
+          <span class="lang" data-es="Necesito comprar el equipo Starlink?" data-en="Do I need to buy the Starlink equipment?"></span>
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner"><span class="lang" data-es="No. El equipo Starlink (antena, router y todos los accesorios) esta incluido en su suscripcion mensual. No hay costo inicial por el equipo. Nosotros nos encargamos de todo." data-en="No. The Starlink equipment (antenna, router, and all accessories) is included in your monthly subscription. There is no upfront equipment cost. We take care of everything."></span></div>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-question">
+          <span class="lang" data-es="Como puedo pagar el servicio?" data-en="How can I pay for the service?"></span>
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner"><span class="lang" data-es="Ofrecemos multiples metodos de pago incluyendo tarjetas de credito/debito internacionales, transferencias bancarias desde EE.UU., y opciones de pago locales para facilitar el acceso desde Cuba. Los detalles completos estaran disponibles al lanzamiento." data-en="We offer multiple payment methods including international credit/debit cards, US bank transfers, and local payment options to facilitate access from Cuba. Full details will be available at launch."></span></div>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-question">
+          <span class="lang" data-es="Funciona en areas rurales de Cuba?" data-en="Does it work in rural areas of Cuba?"></span>
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner"><span class="lang" data-es="Si. La tecnologia satelital de Starlink no depende de cables o torres terrestres. Funciona en cualquier lugar de Cuba donde tenga una vista clara del cielo, ya sea en La Habana, en el campo o en la costa." data-en="Yes. Starlink satellite technology doesn't depend on cables or ground towers. It works anywhere in Cuba where you have a clear view of the sky, whether in Havana, the countryside, or the coast."></span></div>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-question">
+          <span class="lang" data-es="Que pasa con el servicio durante tormentas o mal tiempo?" data-en="What happens to the service during storms or bad weather?"></span>
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner"><span class="lang" data-es="Starlink esta disenado para funcionar en condiciones climaticas adversas. Lluvias moderadas y nubosidad no afectan el servicio. En tormentas severas puede haber una reduccion temporal de velocidad, pero la conexion se mantiene. El equipo es resistente a la intemperie." data-en="Starlink is designed to work in adverse weather conditions. Moderate rain and cloud cover don't affect the service. In severe storms there may be a temporary speed reduction, but the connection is maintained. The equipment is weatherproof."></span></div>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-question">
+          <span class="lang" data-es="Puedo cancelar mi suscripcion en cualquier momento?" data-en="Can I cancel my subscription at any time?"></span>
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner"><span class="lang" data-es="Si. No hay contratos a largo plazo. Puede cancelar su suscripcion con 30 dias de aviso. El equipo debe ser devuelto en buenas condiciones. No hay cargos por cancelacion." data-en="Yes. There are no long-term contracts. You can cancel your subscription with 30 days notice. Equipment must be returned in good condition. There are no cancellation fees."></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMING SOON / CTA ===== -->
+<section class="cta-section section-pad" id="cta">
+  <div class="container">
+    <div class="cta-inner reveal">
+      <div class="section-label" style="color:#00a3ff"><span class="lang" data-es="Proximamente" data-en="Coming Soon"></span></div>
+      <h2><span class="lang" data-es="Registrese para ser de los primeros" data-en="Sign up to be among the first"></span></h2>
+      <p><span class="lang" data-es="Deje su correo electronico y le avisaremos en cuanto estemos disponibles. Los primeros registrados recibiran prioridad en la instalacion." data-en="Leave your email and we'll notify you as soon as we're available. Early registrants will receive installation priority."></span></p>
+      <form class="cta-form" onsubmit="event.preventDefault();">
+        <input type="email" class="cta-input" data-placeholder-es="Su correo electronico" data-placeholder-en="Your email address" placeholder="Su correo electronico">
+        <button type="submit" class="btn btn-primary"><span class="lang" data-es="Registrarme" data-en="Sign Up"></span></button>
+      </form>
+      <p class="cta-disclaimer"><span class="lang" data-es="Sin spam. Solo le contactaremos con novedades sobre CubaLink." data-en="No spam. We'll only contact you with CubaLink updates."></span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo">
+          <svg class="emblem" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:30px;height:30px">
+            <circle cx="50" cy="50" r="47" stroke="#c5a55a" stroke-width="1.5"/>
+            <circle cx="50" cy="50" r="43" stroke="#c5a55a" stroke-width="0.5" opacity="0.5"/>
+            <defs><path id="ftTopArc" d="M15,50 a35,35 0 0,1 70,0"/><path id="ftBottomArc" d="M20,50 a30,30 0 0,0 60,0"/></defs>
+            <text fill="#c5a55a" font-size="11" font-weight="700" letter-spacing="6" font-family="Arial,sans-serif"><textPath href="#ftTopArc" startOffset="50%" text-anchor="middle">CUBA</textPath></text>
+            <text fill="#c5a55a" font-size="10" font-weight="700" letter-spacing="5" font-family="Arial,sans-serif"><textPath href="#ftBottomArc" startOffset="50%" text-anchor="middle">LINK</textPath></text>
+            <g transform="translate(50,24)" stroke="#c5a55a" stroke-width="1.2" fill="none"><rect x="-3" y="-2" width="6" height="4" rx="1"/><line x1="-8" y1="0" x2="-3" y2="0"/><line x1="3" y1="0" x2="8" y2="0"/><rect x="-8" y="-3" width="5" height="6" rx="0.5" fill="#c5a55a" opacity="0.3"/><rect x="3" y="-3" width="5" height="6" rx="0.5" fill="#c5a55a" opacity="0.3"/></g>
+            <g stroke="#c5a55a" stroke-width="0.6" opacity="0.5" stroke-dasharray="2 2"><line x1="50" y1="28" x2="38" y2="50"/><line x1="50" y1="28" x2="50" y2="52"/><line x1="50" y1="28" x2="62" y2="50"/></g>
+            <path d="M28 54 Q32 50 38 49 Q44 48 50 48 Q56 47 62 49 Q68 50 72 53 Q74 55 72 57 Q68 59 62 60 Q56 60 50 60 Q44 59 38 58 Q32 57 29 56 Q27 55 28 54Z" stroke="#c5a55a" stroke-width="1" fill="rgba(197,165,90,0.1)"/>
+            <polygon points="50,67 51.5,71 56,71.5 52.5,74 53.5,78.5 50,76 46.5,78.5 47.5,74 44,71.5 48.5,71" fill="#c5a55a"/>
+          </svg>
+          CubaLink
+        </a>
+        <p><span class="lang" data-es="Internet satelital de alta velocidad para Cuba. Una empresa cubanoamericana con sede en Miami, FL." data-en="High-speed satellite internet for Cuba. A Cuban-American company based in Miami, FL."></span></p>
+      </div>
+      <div>
+        <div class="footer-heading"><span class="lang" data-es="Navegacion" data-en="Navigation"></span></div>
+        <div class="footer-links">
+          <a href="#problem"><span class="lang" data-es="El Problema" data-en="The Problem"></span></a>
+          <a href="#how"><span class="lang" data-es="Como Funciona" data-en="How It Works"></span></a>
+          <a href="#plans"><span class="lang" data-es="Planes" data-en="Plans"></span></a>
+          <a href="#coverage"><span class="lang" data-es="Cobertura" data-en="Coverage"></span></a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading"><span class="lang" data-es="Empresa" data-en="Company"></span></div>
+        <div class="footer-links">
+          <a href="#about"><span class="lang" data-es="Sobre Nosotros" data-en="About Us"></span></a>
+          <a href="#faq">FAQ</a>
+          <a href="#cta"><span class="lang" data-es="Contacto" data-en="Contact"></span></a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading"><span class="lang" data-es="Legal" data-en="Legal"></span></div>
+        <div class="footer-links">
+          <a href="#"><span class="lang" data-es="Terminos de Servicio" data-en="Terms of Service"></span></a>
+          <a href="#"><span class="lang" data-es="Politica de Privacidad" data-en="Privacy Policy"></span></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 CubaLink LLC. <span class="lang" data-es="Todos los derechos reservados." data-en="All rights reserved."></span></span>
+      <div class="footer-starlink">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        <span class="lang" data-es="Tecnologia Starlink" data-en="Starlink Technology"></span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ===== GENERATE STAR FIELD ===== */
+(function() {
+  var field = document.getElementById('starfield');
+  var count = 70;
+  var html = '';
+  for (var i = 0; i < count; i++) {
+    var x = (Math.random() * 100).toFixed(1);
+    var y = (Math.random() * 100).toFixed(1);
+    var size = (1 + Math.random() * 2).toFixed(1);
+    var dur = (2 + Math.random() * 4).toFixed(1);
+    var delay = (Math.random() * 5).toFixed(1);
+    html += '<div class="star" style="left:'+x+'%;top:'+y+'%;width:'+size+'px;height:'+size+'px;--dur:'+dur+'s;--delay:-'+delay+'s;animation-delay:var(--delay)"></div>';
+  }
+  field.innerHTML = html;
+})();
+
+/* ===== LANGUAGE TOGGLE ===== */
+var currentLang = localStorage.getItem('cubalink-lang') || 'es';
+
+function setLang(lang) {
+  currentLang = lang;
+  localStorage.setItem('cubalink-lang', lang);
+  document.documentElement.lang = lang;
+
+  document.querySelectorAll('.lang').forEach(function(el) {
+    var text = el.getAttribute('data-' + lang);
+    if (text !== null) el.innerHTML = text;
+  });
+
+  document.querySelectorAll('[data-placeholder-' + lang + ']').forEach(function(el) {
+    el.placeholder = el.getAttribute('data-placeholder-' + lang);
+  });
+
+  document.querySelectorAll('.lang-btn').forEach(function(btn) {
+    btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+  });
+}
+
+setLang(currentLang);
+
+document.querySelectorAll('.lang-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    setLang(this.getAttribute('data-lang'));
+  });
+});
+
+/* ===== NAV SCROLL ===== */
+var nav = document.getElementById('nav');
+window.addEventListener('scroll', function() {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, {passive: true});
+
+/* ===== MOBILE NAV ===== */
+var menuBtn = document.getElementById('menuBtn');
+var mobileNav = document.getElementById('mobileNav');
+var mobileClose = document.getElementById('mobileClose');
+
+menuBtn.addEventListener('click', function() {
+  mobileNav.classList.add('open');
+});
+mobileClose.addEventListener('click', function() {
+  mobileNav.classList.remove('open');
+});
+document.querySelectorAll('.mobile-link').forEach(function(link) {
+  link.addEventListener('click', function() {
+    mobileNav.classList.remove('open');
+  });
+});
+
+/* ===== FAQ ACCORDION ===== */
+document.querySelectorAll('.faq-question').forEach(function(q) {
+  q.addEventListener('click', function() {
+    var item = this.parentElement;
+    var wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(function(i) { i.classList.remove('open'); });
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+
+/* ===== SCROLL REVEAL ===== */
+function revealOnScroll() {
+  var reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  for (var i = 0; i < reveals.length; i++) {
+    var el = reveals[i];
+    var top = el.getBoundingClientRect().top;
+    if (top < window.innerHeight - 80) {
+      el.classList.add('visible');
+    }
+  }
+}
+window.addEventListener('scroll', revealOnScroll, {passive: true});
+window.addEventListener('load', revealOnScroll);
+
+/* ===== SPEED BAR ANIMATION ===== */
+var speedObserver = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      document.getElementById('bar-etecsa').classList.add('animated');
+      document.getElementById('bar-cubalink').classList.add('animated');
+      speedObserver.unobserve(entry.target);
+    }
+  });
+}, {threshold: 0.3});
+
+var speedSection = document.querySelector('.speed-compare');
+if (speedSection) speedObserver.observe(speedSection);
+
+/* ===== SMOOTH SCROLL FOR ANCHOR LINKS ===== */
+document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+  a.addEventListener('click', function(e) {
+    var target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      var offset = 80;
+      var pos = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({top: pos, behavior: 'smooth'});
+    }
+  });
+});
+</script>
+</body>
+</html>
