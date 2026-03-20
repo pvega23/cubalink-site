@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Satellite body — flipped (mirrored horizontally) -->
+  <g transform="translate(100,80) scale(-1,1) rotate(-45)">
+    <!-- Main body -->
+    <rect x="-12" y="-8" width="24" height="16" rx="4" fill="#00d4d8" opacity="0.9"/>
+    <!-- Left solar panel -->
+    <rect x="-40" y="-10" width="25" height="20" rx="3" fill="#00d4d8" opacity="0.7"/>
+    <!-- Right solar panel -->
+    <rect x="15" y="-10" width="25" height="20" rx="3" fill="#00d4d8" opacity="0.7"/>
+    <!-- Panel connectors -->
+    <rect x="-15" y="-3" width="5" height="6" rx="1" fill="#00d4d8"/>
+    <rect x="10" y="-3" width="5" height="6" rx="1" fill="#00d4d8"/>
+  </g>
+  <!-- Signal arcs — flipped to bottom-left -->
+  <path d="M52 115 Q42 105 52 95" stroke="#00d4d8" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+  <path d="M42 125 Q27 110 42 90" stroke="#00d4d8" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+  <!-- Signal arcs — top-right (transmitting) -->
+  <path d="M138 55 Q148 45 158 55" stroke="#00d4d8" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.7"/>
+  <path d="M135 45 Q150 30 165 45" stroke="#00d4d8" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.5"/>
+</svg>
